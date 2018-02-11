@@ -12,13 +12,11 @@
 void startParser(){
     FILE *filePntr;
     char currentChar;
-    int ret;
-    char strn[40];
-    int i=0,j=0;
     int intlArryi;
     int intlArryj;
     int chrType;
-    char strns[LIMIT][MAX];
+    char token[LIMIT][MAX];
+    char lexem[LIMIT][MAX];
     int lineNo=1;
 
 
@@ -39,8 +37,8 @@ void startParser(){
          rewind(filePntr);
          while((currentChar=fgetc(filePntr))!='.'){
              chrType = charType(currentChar);
-             build2dArry(strns,intlArryi,intlArryj, currentChar, filePntr, chrType);
-             parseProg(strns[intlArryi]);
+             build2dArry(token,intlArryi,intlArryj, currentChar, filePntr, chrType);
+             //parseProg(token[intlArryi]);
              intlArryi++; intlArryj=0;
              fseek(filePntr, -1, SEEK_CUR);
              if((testChar(currentChar,'\n')==0)){
@@ -51,7 +49,8 @@ void startParser(){
 }
 
 
-void parseProg(char *strn){
+/*void parseProg(char *strn){
+    //First confirm that the declarations are made.
     if(!strcmp(strn,"DCL")){
         printf("You found a DCL!\n");
     }else if(!strcmp(strn, "IDENTIF")){
@@ -60,7 +59,12 @@ void parseProg(char *strn){
         printf("You've found an INT\n");
     }
 
+}*/
+
+void parseDcls(char *token, char * lexeme){
+    //if(strcmp(token,"DCL"){
 }
+
 
 int isEmpty(FILE *fp){
     if(ftell(fp)==0){

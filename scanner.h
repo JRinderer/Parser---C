@@ -21,4 +21,5 @@ int is2dOperator(char *);
 int sizeOfPunctArry(char);
 int isPunctPartOf2D(char, char);
 void parseProg(char *);
+void parseDcls(char*, char*);
 #endif //SCANNER01_SCANNER_H

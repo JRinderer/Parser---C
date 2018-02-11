@@ -309,4 +309,21 @@
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 =======================================2/6/2018 - Start - 20:01 - JRinderer============================================
-    ********Summary: Still need to handle decimals correctly. They are currently split up as 1 . 5. 
+    ********Summary: Still need to handle decimals correctly. They are currently split up as 1 . 5. This can be handled
+    later as I believe this will be simple enough in the future.
+=======================================2/6/2018 - END - 22:00 - JRinderer==============================================
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+=======================================START PARSER NOTES RETURN TO SCANNER LATER======================================
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+=======================================2/10/2018 - START - 08:00 - JRinderer===========================================
+    ********Summary: Began work on parser, use functions within scanner to build words, test these words against the
+    various productions rules according to PAL. Notes below will outline some of this, as well as error, mistakes that
+    I have noticed and potentional issues.
+
+        -Overall plan:
+            1. First we need to use the 2d array builder to build the words from the chars.
+            2. We don't want to skip the LEXEME as we want to ensure that the logic meets the criteria.
+            3. Might be best to store words as sep entities. TOKEN and LEXEME to ensure that they meet the correct logic
+            4. Need a method to get the TOKEN and then the LEXEME immediately after. Store these in two variables
+               and then pass them to a function for testing.
+            5.
