@@ -326,4 +326,5 @@
             3. Might be best to store words as sep entities. TOKEN and LEXEME to ensure that they meet the correct logic
             4. Need a method to get the TOKEN and then the LEXEME immediately after. Store these in two variables
                and then pass them to a function for testing.
-            5.
+                4a. Possibly write a function that will detect when we've hit a /t char and then act accordingly?
+                4b. If a /t is detected store the chars within the LEXEME word string.

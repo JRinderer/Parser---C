@@ -37,7 +37,13 @@ void startParser(){
          rewind(filePntr);
          while((currentChar=fgetc(filePntr))!='.'){
              chrType = charType(currentChar);
-             build2dArry(token,intlArryi,intlArryj, currentChar, filePntr, chrType);
+             if(currentChar!='\t') {
+                 build2dArry(token, intlArryi, intlArryj, currentChar, filePntr, chrType);
+             }else if(currentChar=='\t'){
+                 //This will determine if we're at a \t char but I need to skip the chars here and move to the next
+                 //char that's not a \t.
+                 build2dArry(lexem, intlArryi, intlArryj, currentChar, filePntr, chrType);
+             }
              //parseProg(token[intlArryi]);
              intlArryi++; intlArryj=0;
              fseek(filePntr, -1, SEEK_CUR);
