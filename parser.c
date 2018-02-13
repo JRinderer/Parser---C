@@ -37,14 +37,30 @@ void startParser(){
          rewind(filePntr);
          while((currentChar=fgetc(filePntr))!='.'){
              chrType = charType(currentChar);
-             if(currentChar!='\t') {
+             if(currentChar!='\t'){
                  build2dArry(token, intlArryi, intlArryj, currentChar, filePntr, chrType);
-             }else if(currentChar=='\t'){
-                 //This will determine if we're at a \t char but I need to skip the chars here and move to the next
-                 //char that's not a \t.
+             }else{
+                 filePntr=skipTabs(currentChar, filePntr);
+                 currentChar=fgetc(filePntr);
+                 chrType=charType(currentChar);
                  build2dArry(lexem, intlArryi, intlArryj, currentChar, filePntr, chrType);
              }
-             //parseProg(token[intlArryi]);
+             //if(currentChar!='\t') {
+                 //This will determine if we're at a \t char but I need to skip the chars here and move to the next
+                 //char that's not a \t.
+                 //build2dArry(token, intlArryi, intlArryj, currentChar, filePntr, chrType);
+
+             //}else if(currentChar=='\t'){
+               //  filePntr=skipTabs(currentChar, filePntr);
+                // currentChar=fgetc(filePntr);
+                 //chrType=charType(currentChar);
+                 //build2dArry(lexem, intlArryi, intlArryj, currentChar, filePntr, chrType);
+            // }
+             //parseProg(token[intlArryi])
+             printf("The token is %s\n",token[intlArryi]);
+             if(lexem[intlArryi]!=NULL) {
+                 printf("The lexem is %s\n", lexem[intlArryi]);
+             }
              intlArryi++; intlArryj=0;
              fseek(filePntr, -1, SEEK_CUR);
              if((testChar(currentChar,'\n')==0)){
@@ -52,6 +68,14 @@ void startParser(){
              }
          }
      }
+}
+
+int skipTabs(char c, FILE *fp){
+    do{
+        c=fgetc(fp);
+    }while (c=='\t');
+    fseek(fp,-1,SEEK_CUR);
+    return fp;
 }
 
 

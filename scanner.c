@@ -180,7 +180,7 @@ void writeLnes(char * txt1, char * txt2){
 //=====================this function builds a 2d array of continuous chars (ints included)=============================
 void build2dArry(char arry[LIMIT][MAX],int itemi, int itemj, char c, FILE * fPtr, int charsType) {
     arry[itemi][itemj++] = c;
-    while (charType(c = fgetc(fPtr))==charsType){ //||charType(c = fgetc(fPtr))==2
+    while (charType(c = fgetc(fPtr))==charsType){ //&& c != '\t'){ //||charType(c = fgetc(fPtr))==2
 
         arry[itemi][itemj++]= mkeUprCse(c);
     }

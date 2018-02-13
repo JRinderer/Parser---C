@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/jrinder/CLionProjects/parser/main.c
+/home/jrinder/CLionProjects/Parser---C/main.c
 token.h
-/home/jrinder/CLionProjects/parser/token.h
+/home/jrinder/CLionProjects/Parser---C/token.h
 stdio.h
 -
 stdlib.h
@@ -18,27 +18,25 @@ string.h
 ctype.h
 -
 scanner.h
-/home/jrinder/CLionProjects/parser/scanner.h
+/home/jrinder/CLionProjects/Parser---C/scanner.h
 parser.h
-/home/jrinder/CLionProjects/parser/parser.h
+/home/jrinder/CLionProjects/Parser---C/parser.h
 
-/home/jrinder/CLionProjects/parser/parser.c
+/home/jrinder/CLionProjects/Parser---C/parser.c
 token.h
-/home/jrinder/CLionProjects/parser/token.h
+/home/jrinder/CLionProjects/Parser---C/token.h
 stdio.h
 -
 memory.h
 -
 parser.h
-/home/jrinder/CLionProjects/parser/parser.h
+/home/jrinder/CLionProjects/Parser---C/parser.h
 scanner.h
-/home/jrinder/CLionProjects/parser/scanner.h
+/home/jrinder/CLionProjects/Parser---C/scanner.h
 
-/home/jrinder/CLionProjects/parser/parser.h
-bits/types/FILE.h
--
+/home/jrinder/CLionProjects/Parser---C/parser.h
 
-/home/jrinder/CLionProjects/parser/scanner.c
+/home/jrinder/CLionProjects/Parser---C/scanner.c
 stdio.h
 -
 strings.h
@@ -50,15 +48,15 @@ memory.h
 stdlib.h
 -
 token.h
-/home/jrinder/CLionProjects/parser/token.h
+/home/jrinder/CLionProjects/Parser---C/token.h
 scanner.h
-/home/jrinder/CLionProjects/parser/scanner.h
+/home/jrinder/CLionProjects/Parser---C/scanner.h
 systemdefs.h
-/home/jrinder/CLionProjects/parser/systemdefs.h
+/home/jrinder/CLionProjects/Parser---C/systemdefs.h
 
-/home/jrinder/CLionProjects/parser/scanner.h
+/home/jrinder/CLionProjects/Parser---C/scanner.h
 
-/home/jrinder/CLionProjects/parser/systemdefs.h
+/home/jrinder/CLionProjects/Parser---C/systemdefs.h
 
-/home/jrinder/CLionProjects/parser/token.h
+/home/jrinder/CLionProjects/Parser---C/token.h
 
