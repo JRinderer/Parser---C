@@ -331,5 +331,16 @@
 =======================================2/10/2018 - END - 20:00 JRinderer===============================================
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-=======================================2/12/2018 - START - JRinderer==================================================
-    ********Summary:
+=======================================2/12/2018 - START - JRinderer===================================================
+    ********Summary: Working on parser... for some reason lexeme seems to be storing either the '\t' or the '\0' which
+    appears to be bumping it down a line. It also seems to be dropping the first letter.
+        -Some portions of the CHARS seem to be hanging on and printing
+
+=======================================2/12/2018 - END - JRinderer=====================================================
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+=======================================2/14/2018 - START - JRinderr====================================================
+    *******Summary: Still working on storing chars into words to then make comparison and parse. This was resolved.
+    Issue revolved around properly storing the TOKEN and LEXEME with different int's for array's and adding a total
+    count variable that could store the overall position. Currnently dividing by 2 for the TOKEN and LEXEME. Might find
+    a method to avoid/simplify this later. Next step is to take these two "strings" and then parse them.
