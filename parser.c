@@ -7,19 +7,18 @@
 #include "parser.h"
 #include "scanner.h"
 
+char token[LIMIT][MAX];
+char lexem[LIMIT][MAX];
+
 void startParser(){
-    FILE *filePntr;
     char currentChar;
-    int intI;
-    int intJ;
-    int intA;
-    int intB;
+    int intI=0;
+    int intJ=0;
+    int intA=0;
+    int intB=0;
     int chrType;
-    char token[LIMIT][MAX];
-    char lexem[LIMIT][MAX];
     int lineNo=1;
     int totalI=0;
-
 
     //====================================OPEN THE .SCAN FILE==========================================================
     if ((filePntr = fopen("scnr.scan", "r"))==NULL){
@@ -46,7 +45,7 @@ void startParser(){
                  build2dArry(token, intI, intJ, currentChar, filePntr, chrType);
                  intI++; intJ=0;
              }else if(currentChar=='\t'){
-                 filePntr=skipTabs(currentChar, filePntr);
+                 skipTabs(currentChar);
                  currentChar=fgetc(filePntr);
                  chrType=charType(currentChar);
                  build2dArry(lexem, intA, intB, currentChar, filePntr, chrType);
@@ -59,20 +58,133 @@ void startParser(){
              }
          }
      }
-    int a = 0;
-    for(int i=0;i<(totalI/2);i++){
-        printf("The TOKEN is %s\n",token[i]);
-        printf("The LEXEME IS %s\n",lexem[i]);
-    }
+    token[intA+1][0] = '.\0';
+    //=================================End building chars into strings=================================================
+    //===============================================Begin parser======================================================
+    arryStrt = 0;
+    tokn = token[arryStrt];
+    lexm = lexem[arryStrt];
 
+    beginParser();
 }
+
+void beginParser(){
+    parseDecDefs();
+    parseProc();
+    //getNextStrngArry(arryStrt);
+    printf("The last token is %s",tokn);
+}
+
+void parseDecDefs(){
+    if(compLexTok(lexm,tokn,"DCL")==1){
+        return;
+    }else{
+        getNextStrngArry(arryStrt);
+        parseDecList();
+    }
+}
+
+void parseDecList(){
+    if(compLexTok(lexm,tokn, "IDENTIF")==1){
+        return;
+    }else{
+        getNextStrngArry(arryStrt);
+        matchLexTok(lexm,tokn,":");
+        matchLexTok(lexm,tokn,"INT");
+        matchLexTok(lexm,tokn,";");
+        parseDecList();
+    }
+}
+
+void parseProc(){
+    matchLexTok(lexm,tokn,"BEGIN");
+    parseStatmntsLst();
+    matchLexTok(lexm,tokn, "END");
+}
+
+void parseStatmntsLst(){
+    if(compLexTok(lexm,tokn,"END")==0){
+        return;
+    }else{
+        parseIndvStatmnt();
+        parseStatmntsLst();
+    }
+}
+
+void parseIndvStatmnt(){
+    if(compLexTok(lexm,tokn,"WRITELN")==0){
+        parseWrtLne();
+    }else if(compLexTok(lexm,tokn,"IDENTIF")==0){
+        parseAssngmnt();
+    }else{
+        printf("Error in IndvStatement\n");
+    }
+}
+
+void parseWrtLne(){
+    matchLexTok(lexm,tokn,"WRITELN");
+    matchLexTok(lexm,tokn,"(");
+    matchLexTok(lexm,tokn,"IDENTIF");
+    matchLexTok(lexm,tokn,")");
+    matchLexTok(lexm,tokn,";");
+}
+
+void parseAssngmnt(){
+    matchLexTok(lexm,tokn,"IDENTIF");
+    matchLexTok(lexm,tokn,":=");
+    parseExprsn();
+    matchLexTok(lexm,tokn,";");
+}
+
+void parseExprsn(){
+    parseTerms();
+    parseAddExprsn();
+}
+
+void parseAddExprsn(){
+    if(strcmp(tokn,"+") && (strcmp(tokn,"-"))){
+        return;
+    }else{
+        getNextStrngArry(arryStrt);
+        parseTerms();
+        parseAddExprsn();
+    }
+}
+
+void parseTerms(){
+    parseFactor();
+    parseAddTerms();
+}
+
+void parseAddTerms(){
+
+    if(strcmp(tokn,"*") && (strcmp(tokn,"/"))){
+        return;
+    }else{
+        getNextStrngArry(arryStrt);
+        parseTerms();
+        parseAddTerms();
+    }
+}
+//ERROR IS OCCURING IN HERE============================================================================================
+void parseFactor(){
+    if(compLexTok(lexm,tokn,"IDENTIF")==0){
+        getNextStrngArry(arryStrt);
+    }else if(compLexTok(lexm,tokn,"NUMERIC")==0){
+        getNextStrngArry(arryStrt);
+    }else{
+        matchLexTok(lexm,tokn,"(");
+        parseExprsn();
+        matchLexTok(lexm,tokn,")");
+    }
+}
+//=====================================================================================================================
 //=====================================Function to ignore tabs=========================================================
-int skipTabs(char c, FILE *fp){
+void skipTabs(char c){
     do{
-        c=fgetc(fp);
+        c=fgetc(filePntr);
     }while (c=='\t');
-    fseek(fp,-1,SEEK_CUR);
-    return fp;
+    fseek(filePntr,-1,SEEK_CUR);
 }
 //=====================================================================================================================
 //====================================Function to test if file is empty================================================
@@ -84,3 +196,33 @@ int isEmpty(FILE *fp){
     }
 }
 //=====================================================================================================================
+//=====================================================================================================================
+//=====================================Function compares the TOKEN and LEXEME==========================================
+//--------This function returns either the number of the next string the parser needs (for lexeme and token) or if ----
+//--------there is a zero this will indicate a syntax Error and end the parser. reqMatch indicates the comparisons-----
+//--------MUST match. Otherwise the function is simply comparing the strings to determine if they match.---------------
+void matchLexTok(char *lex, char *tok, char *valComp){
+    if(!strcmp(tok,valComp)){
+        getNextStrngArry(arryStrt);
+    }else{
+        printf("Error in MustMatch %s & %s\n",tokn, lexm);
+    }
+}
+//=====================================================================================================================
+//=====================================Function checks to see if TOKEN and LEXEME match================================
+//--------This function seems un-ncessary. Consider how I can modify the matchLexTok. This returns a 1 for false, and--
+//--------0 for true.
+int compLexTok(char *lex, char *tok, char *valComp){
+    if(!strcmp(tok,valComp)){
+        return (0);
+    }else{
+        return (1);
+    }
+}
+//=====================================================================================================================
+//=====================================Function gets the next string===================================================
+void getNextStrngArry(int curntArr){
+    tokn = token[curntArr+1];
+    lexm = lexem[curntArr + 1];
+    arryStrt = curntArr + 1;
+}

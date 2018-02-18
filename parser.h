@@ -7,8 +7,32 @@
 #ifndef SCANNER01_PARSER_H
 #define SCANNER01_PARSER_H
 
+
 void startParser();
-int skipTabs(char, FILE *);
+void skipTabs(char c);
 int isEmpty(FILE *);
+FILE *filePntr; //made this a variable within parser.h due to issue passing file Pointers from function and returning
+//the pointer
+int wordNum;
+char *lexm, *tokn;
+void getNextStrngArry(int);
+void matchLexTok(char *, char *,char *);
+int compLexTok(char *, char *, char *);
+void beginParser();
+void parseDecDefs();
+void parseProc();
+void parseStatmntsLst();
+void parseIndvStatmnt();
+void parseWrtLne();
+void parseAssngmnt();
+void parseExprsn();
+void parseTerms();
+void parseTerms();
+void parseAddTerms();
+void parseFactor();
+void parseAddExprsn();
+void parseDecList();
+char endChar;
+int arryStrt;
 
 #endif //SCANNER01_PARSER_H

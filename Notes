@@ -339,8 +339,17 @@
 =======================================2/12/2018 - END - JRinderer=====================================================
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-=======================================2/14/2018 - START - JRinderr====================================================
+=======================================2/14/2018 - START - JRinderer===================================================
     *******Summary: Still working on storing chars into words to then make comparison and parse. This was resolved.
     Issue revolved around properly storing the TOKEN and LEXEME with different int's for array's and adding a total
     count variable that could store the overall position. Currnently dividing by 2 for the TOKEN and LEXEME. Might find
     a method to avoid/simplify this later. Next step is to take these two "strings" and then parse them.
+======================================2/14/2018 - END - JRinderer======================================================
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+======================================2/18/2018 - START - JRinderer====================================================
+    ********Summary: Parser seems to be having issues with the + and - signs. This is causing it to throw an error when
+    it should be clear. Testing with smaller code to verify. This was resolved after debugging and finding the
+    comparison I was making should have been an && statement and not a || statement. I also referenced an incorrect
+    funciton which resulted in contiunal recursion and ultimately a segmentation fault. Next step is to translate the
+    .scan file into assembly language.
