@@ -129,6 +129,7 @@ void parseWrtLne(){
     matchLexTok(lexm,tokn,"(");
     matchLexTok(lexm,tokn,"IDENTIF");
     matchLexTok(lexm,tokn,")");
+    printWritLn(1,"test");
     matchLexTok(lexm,tokn,";");
 }
 

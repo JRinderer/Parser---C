@@ -120,3 +120,14 @@ void printMultiLines(char *ops){
         printLines("\t\t\t","push\t\t\t\t","rax","");
     }
 }
+
+void printWritLn(int strngLngth, char *strn){
+    printLines("\t\t\t","mov\t\t\t\t","rdi,_INT_","");
+    printLines("\t\t\t","pop\t\t\t\t","rsi","");
+    printLines("\t\t\t","mov\t\t\t\t","rax,0","");
+    printLines("\t\t\t","call\t\t\t","printf","");
+    printLines("\t\t\t","mov\t\t\t\t","rdi,_STR_","");
+    printLines("\t\t\t","mov\t\t\t\t","rsi,_CRLF_","");
+    printLines("\t\t\t","mov\t\t\t\t","rax,0","");
+    printLines("\t\t\t","call\t\t\t","printf","");
+}

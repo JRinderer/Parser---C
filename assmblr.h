@@ -25,4 +25,6 @@ void printAdditionLines(char *);
 
 void printMultiLines(char *);
 
+void printWritLn(int, char*);
+
 #endif //SCANNER01_ASSMBLR_H

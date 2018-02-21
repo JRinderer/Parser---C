@@ -20,3 +20,19 @@ main:		nop									;main PROC
 			push			qword [B]				;print identifiers
 			push			qword [A]				;print identifiers
 			pop				qword [E]				;print assignments
+			mov				rdi,_INT_
+			pop				rsi
+			mov				rax,0
+			call			printf
+			mov				rdi,_STR_
+			mov				rsi,_CRLF_
+			mov				rax,0
+			call			printf
+			mov				rdi,_INT_
+			pop				rsi
+			mov				rax,0
+			call			printf
+			mov				rdi,_STR_
+			mov				rsi,_CRLF_
+			mov				rax,0
+			call			printf
