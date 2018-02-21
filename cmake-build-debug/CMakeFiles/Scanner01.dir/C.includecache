@@ -6,6 +6,20 @@
 
 #IncludeRegexTransform: 
 
+/home/jrinder/CLionProjects/Parser---C/assmblr.c
+bits/types/FILE.h
+-
+stdio.h
+-
+memory.h
+-
+assmblr.h
+/home/jrinder/CLionProjects/Parser---C/assmblr.h
+token.h
+/home/jrinder/CLionProjects/Parser---C/token.h
+
+/home/jrinder/CLionProjects/Parser---C/assmblr.h
+
 /home/jrinder/CLionProjects/Parser---C/main.c
 token.h
 /home/jrinder/CLionProjects/Parser---C/token.h
@@ -21,6 +35,8 @@ scanner.h
 /home/jrinder/CLionProjects/Parser---C/scanner.h
 parser.h
 /home/jrinder/CLionProjects/Parser---C/parser.h
+assmblr.h
+/home/jrinder/CLionProjects/Parser---C/assmblr.h
 
 /home/jrinder/CLionProjects/Parser---C/parser.c
 token.h
@@ -33,6 +49,8 @@ parser.h
 /home/jrinder/CLionProjects/Parser---C/parser.h
 scanner.h
 /home/jrinder/CLionProjects/Parser---C/scanner.h
+assmblr.h
+/home/jrinder/CLionProjects/Parser---C/assmblr.h
 
 /home/jrinder/CLionProjects/Parser---C/parser.h
 

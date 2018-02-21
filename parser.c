@@ -6,6 +6,7 @@
 #include <memory.h>
 #include "parser.h"
 #include "scanner.h"
+#include "assmblr.h"
 
 char token[LIMIT][MAX];
 char lexem[LIMIT][MAX];
@@ -98,6 +99,7 @@ void parseDecList(){
 
 void parseProc(){
     matchLexTok(lexm,tokn,"BEGIN");
+    printBeginAsm();
     parseStatmntsLst();
     matchLexTok(lexm,tokn, "END");
 }
@@ -169,8 +171,10 @@ void parseAddTerms(){
 //ERROR IS OCCURING IN HERE============================================================================================
 void parseFactor(){
     if(compLexTok(lexm,tokn,"IDENTIF")==0){
+        printIdentifs(lexm);
         getNextStrngArry(arryStrt);
     }else if(compLexTok(lexm,tokn,"NUMERIC")==0){
+        printNums(lexm);
         getNextStrngArry(arryStrt);
     }else{
         matchLexTok(lexm,tokn,"(");
@@ -198,9 +202,9 @@ int isEmpty(FILE *fp){
 //=====================================================================================================================
 //=====================================================================================================================
 //=====================================Function compares the TOKEN and LEXEME==========================================
-//--------This function returns either the number of the next string the parser needs (for lexeme and token) or if ----
-//--------there is a zero this will indicate a syntax Error and end the parser. reqMatch indicates the comparisons-----
-//--------MUST match. Otherwise the function is simply comparing the strings to determine if they match.---------------
+//--------This function checks to token against a passed pointer to an array. Since I create a .txt file initially I--
+//--------have already handled the lexeme. The *lex variable is passed but currently unused as it doesn't seem--------
+//--------necessary. This function will increment the array to the next string in the list.---------------------------
 void matchLexTok(char *lex, char *tok, char *valComp){
     if(!strcmp(tok,valComp)){
         getNextStrngArry(arryStrt);

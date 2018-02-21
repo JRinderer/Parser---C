@@ -1,4 +1,6 @@
+
 #include "token.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,6 +8,7 @@
 
 #include "scanner.h"
 #include "parser.h"
+#include "assmblr.h"
 
 
 int main(int argc, char *argv[]) {
@@ -101,6 +104,8 @@ int main(int argc, char *argv[]) {
     }
     /*---------/End Job-------------*/
     fclose(filePtr);
+    createNewAsmFle("assmblr.asm");
+
     //fclose(filePtr);
     startParser();
     return 0;

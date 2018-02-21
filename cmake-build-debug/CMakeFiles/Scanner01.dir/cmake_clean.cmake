@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Scanner01.dir/main.c.o"
   "CMakeFiles/Scanner01.dir/scanner.c.o"
   "CMakeFiles/Scanner01.dir/parser.c.o"
+  "CMakeFiles/Scanner01.dir/assmblr.c.o"
   "Scanner01.pdb"
   "Scanner01"
 )

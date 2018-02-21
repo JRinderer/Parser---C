@@ -11,6 +11,8 @@
 #include "token.h"
 #include "scanner.h"
 #include "systemdefs.h"
+
+
 //===================================0 indicates scanner, 1 indicates parser===========================================
 TokenType getTokenType(FILE *filePntr, int scanrParser) {
     int lneNum = 1;
