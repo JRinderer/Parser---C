@@ -61,18 +61,18 @@ void printBeginAsm(){
     nullLine();
     printLines(";TEXT SECTION","","","");
     nullLine();
-    printLines("\t\t\t","section","\t\t.txt","");
+    printLines("\t\t\t","section","\t\t\t.txt","");
     nullLine();
-    printLines("\t\t\t","global","\t\tmain","");
+    printLines("\t\t\t","global","\t\t\tmain","");
     nullLine();
     printLines("main:","\t\tnop","\t\t\t\t\t\t","\t\t\t;main PROC");
-    printLines("\t\t\t","push","\t\trbp","");
-    printLines("\t\t\t","mov","\t\t\trbp,rsp","");
+    printLines("\t\t\t","push","\t\t\trbp","");
+    printLines("\t\t\t","mov","\t\t\t\trbp,rsp","");
 
 }
 
 void printNums(char *num){
-    printLines("\t\t\t","push\t\t",num,"\t\t\t\t\t\t;emit numbers");
+    printLines("\t\t\t","push\t\t\t",num,"\t\t\t\t\t\t;emit numbers");
 
 }
 
@@ -83,5 +83,40 @@ void printIdentifs(char *ident){
     strcat(strnHldr,ident);
     strcat(strnHldr,"]");
 
-    printLines("\t\t\t","pop\t\t\t",strnHldr,"\t\t\t\t;print lines");
+    printLines("\t\t\t","push\t\t\t",strnHldr,"\t\t\t\t;print identifiers");
+}
+
+void printAssngment(char *assng){
+    char strnHldr[LIMIT]="";
+    strcat(strnHldr,"qword ");
+    strcat(strnHldr,"[");
+    strcat(strnHldr,assng);
+    strcat(strnHldr,"]");
+
+    printLines("\t\t\t","pop\t\t\t\t",strnHldr,"\t\t\t\t;print assignments");
+}
+
+void printAdditionLines(char *ops){
+    printLines("\t\t\t","pop\t\t\t\t","rbx","\t\t\t\t\t\t;print addition ops");
+    printLines("\t\t\t","pop\t\t\t\t","rax","");
+    //if(strcmp(tokn,"+")
+    if(!strcmp(ops,"+")){
+        printLines("\t\t\t","add\t\t\t\t","rax,rbx","\t\t\t\t\t;adds the contents of rax and rbx");
+    }else{
+        printLines("\t\t\t","sub\t\t\t\t","rax,rbx","\t\t\t\t\t;subtracts the contents of rax and rbx");
+    }
+    printLines("\t\t\t","push\t\t\t","rax","");
+}
+
+void printMultiLines(char *ops){
+    printLines("\t\t\t","pop\t\t\t\t","rbx","\t\t\t\t\t;print multiplcation/division");
+    printLines("\t\t\t","pop\t\t\t\t","rax","");
+    printLines("\t\t\t","mov\t\t\t\t","rdx,0","move a 0 into rdx");
+    if(!strcmp(ops,"*")){
+        printLines("\t\t\t","imul\t\t\t\t","rax,rbx","\t\t\t\t\t;multiply the two register");
+        printLines("\t\t\t","push\t\t\t\t","rax","");
+    }else if(!strcmp(ops,"/")){
+        printLines("\t\t\t","idiv\t\t\t\t","rbx","\t\t\t\t\t;multiply the two register");
+        printLines("\t\t\t","push\t\t\t\t","rax","");
+    }
 }

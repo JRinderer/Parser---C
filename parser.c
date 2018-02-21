@@ -10,6 +10,7 @@
 
 char token[LIMIT][MAX];
 char lexem[LIMIT][MAX];
+char *tmpLexm;
 
 void startParser(){
     char currentChar;
@@ -132,9 +133,11 @@ void parseWrtLne(){
 }
 
 void parseAssngmnt(){
+    tmpLexm=lexem[arryStrt];
     matchLexTok(lexm,tokn,"IDENTIF");
     matchLexTok(lexm,tokn,":=");
     parseExprsn();
+    printAssngment(tmpLexm);
     matchLexTok(lexm,tokn,";");
 }
 
@@ -147,6 +150,7 @@ void parseAddExprsn(){
     if(strcmp(tokn,"+") && (strcmp(tokn,"-"))){
         return;
     }else{
+        printAdditionLines(tokn);
         getNextStrngArry(arryStrt);
         parseTerms();
         parseAddExprsn();

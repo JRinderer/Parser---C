@@ -19,4 +19,10 @@ void printNums(char *);
 
 void printIdentifs(char *);
 
+void printAssngment(char *);
+
+void printAdditionLines(char *);
+
+void printMultiLines(char *);
+
 #endif //SCANNER01_ASSMBLR_H
