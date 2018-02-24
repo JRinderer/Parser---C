@@ -3,6 +3,7 @@
 
 CMakeFiles/Scanner01.dir/assmblr.c.o: ../assmblr.c
 CMakeFiles/Scanner01.dir/assmblr.c.o: ../assmblr.h
+CMakeFiles/Scanner01.dir/assmblr.c.o: ../parser.h
 CMakeFiles/Scanner01.dir/assmblr.c.o: ../token.h
 
 CMakeFiles/Scanner01.dir/main.c.o: ../assmblr.h

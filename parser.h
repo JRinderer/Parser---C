@@ -34,5 +34,8 @@ void parseAddExprsn();
 void parseDecList();
 char endChar;
 int arryStrt;
+int identifSize;
+char *identifer[LIMIT];
+
 
 #endif //SCANNER01_PARSER_H

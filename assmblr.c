@@ -2,11 +2,12 @@
 // Created by jrinder on 2/20/18.
 //
 
-#include <bits/types/FILE.h>
+//#include <bits/types/FILE.h>
 #include <stdio.h>
 #include <memory.h>
 #include "assmblr.h"
 #include "token.h"
+#include "parser.h"
 
 FILE *filePntr;
 
@@ -61,11 +62,14 @@ void printBeginAsm(){
     nullLine();
     printLines(";TEXT SECTION","","","");
     nullLine();
+    printLines("","global main","","");
+    nullLine();
     printLines("\t\t\t","section","\t\t\t.txt","");
     nullLine();
-    printLines("\t\t\t","global","\t\t\tmain","");
+    printLines("\t\t\t","extern","\t\t\tprintf","");
+    //printLines("\t\t\t","global","\t\t\t_start","");
     nullLine();
-    printLines("main:","\t\tnop","\t\t\t\t\t\t","\t\t\t;main PROC");
+    printLines("main:","\t\tnop","\t\t\t\t\t\t","\t\t\t\t;main PROC");
     printLines("\t\t\t","push","\t\t\trbp","");
     printLines("\t\t\t","mov","\t\t\t\trbp,rsp","");
 
@@ -109,19 +113,28 @@ void printAdditionLines(char *ops){
 }
 
 void printMultiLines(char *ops){
-    printLines("\t\t\t","pop\t\t\t\t","rbx","\t\t\t\t\t;print multiplcation/division");
+    printLines("\t\t\t","pop\t\t\t\t","rbx","\t\t\t\t\t\t;print multiplcation/division");
     printLines("\t\t\t","pop\t\t\t\t","rax","");
-    printLines("\t\t\t","mov\t\t\t\t","rdx,0","move a 0 into rdx");
+    printLines("\t\t\t","mov\t\t\t\t","rdx,0","\t\t\t\t\t;move a 0 into rdx");
     if(!strcmp(ops,"*")){
-        printLines("\t\t\t","imul\t\t\t\t","rax,rbx","\t\t\t\t\t;multiply the two register");
-        printLines("\t\t\t","push\t\t\t\t","rax","");
+        printLines("\t\t\t","imul\t\t\t","rax,rbx","\t\t\t\t\t;multiply the two register");
+        printLines("\t\t\t","push\t\t\t","rax","");
     }else if(!strcmp(ops,"/")){
         printLines("\t\t\t","idiv\t\t\t\t","rbx","\t\t\t\t\t;multiply the two register");
         printLines("\t\t\t","push\t\t\t\t","rax","");
     }
 }
 
-void printWritLn(int strngLngth, char *strn){
+void printWritLn(char *strngLngth, char *strn){
+//====================Intially planed on using strictly assembly possible reuse for KLUMP==============================
+/*    printLines("\t\t\t","mov\t\t\t\t","rax,1","");
+    printLines("\t\t\t","mov\t\t\t\t","rdi,1","");
+    printLines("\t\t\t","mov\t\t\t\trsi,",strn,"");
+    printLines("\t\t\t","mov\t\t\t\trdx,",strngLngth,"");
+    printLines("\t\t\t","syscall","","");
+    printLines("\t\t\t","mov\t\t\t\trax",",60","");
+    printLines("\t\t\t","xor\t\t\t\trdi,", "rdi","");*/
+//=====================================================================================================================
     printLines("\t\t\t","mov\t\t\t\t","rdi,_INT_","");
     printLines("\t\t\t","pop\t\t\t\t","rsi","");
     printLines("\t\t\t","mov\t\t\t\t","rax,0","");
@@ -130,4 +143,30 @@ void printWritLn(int strngLngth, char *strn){
     printLines("\t\t\t","mov\t\t\t\t","rsi,_CRLF_","");
     printLines("\t\t\t","mov\t\t\t\t","rax,0","");
     printLines("\t\t\t","call\t\t\t","printf","");
+}
+
+void printEndAsm(){
+    printLines("\t\t\t","mov\t\t\t\t","rsp,rbp","");
+    printLines("\t\t\t","pop\t\t\t\t","rbp","");
+    printLines("\t\t\t","mov\t\t\t\t","rax,0","");
+    printLines("\t\t\t","ret","","");
+    nullLine();
+    printLines(";BSS Section","","","");
+    nullLine();
+    printLines("\t\t\t","section\t\t\t\t",".bss","");
+    nullLine();
+    //
+    for(int i=0; i<identifSize;i++){
+        printLines(strcat(identifer[i],":"),"\t\t\t","resq\t\t\t","1");
+    }
+    //
+    nullLine();
+    printLines(";DATA Section","","","");
+    nullLine();
+    printLines("\t\t\t","section\t\t\t\t",".data","");
+    printLines("_INT_    :\t","db\t\t\t\t\t","\"%i\",0x0","");
+    printLines("_STR_    :\t","db\t\t\t\t\t","\"%s\",0x0","");
+    printLines("_CRLF_   :\t","db\t\t\t\t\t","0xa,0x0","");
+    nullLine();
+
 }

@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/jrinder/CLionProjects/Parser---C/assmblr.c
-bits/types/FILE.h
--
 stdio.h
 -
 memory.h
@@ -17,6 +15,8 @@ assmblr.h
 /home/jrinder/CLionProjects/Parser---C/assmblr.h
 token.h
 /home/jrinder/CLionProjects/Parser---C/token.h
+parser.h
+/home/jrinder/CLionProjects/Parser---C/parser.h
 
 /home/jrinder/CLionProjects/Parser---C/assmblr.h
 

@@ -10,7 +10,8 @@
 
 char token[LIMIT][MAX];
 char lexem[LIMIT][MAX];
-char *tmpLexm;
+int arryC=0;
+
 
 void startParser(){
     char currentChar;
@@ -68,6 +69,7 @@ void startParser(){
     lexm = lexem[arryStrt];
 
     beginParser();
+    printf("The number of identifiers is : %d",identifSize);
 }
 
 void beginParser(){
@@ -90,6 +92,12 @@ void parseDecList(){
     if(compLexTok(lexm,tokn, "IDENTIF")==1){
         return;
     }else{
+        //this returns the number of unique identifiers we need to concern ourselves with
+        if(!strcmp(tokn,"IDENTIF")){
+            identifSize++;
+            identifer[arryC]=lexm;
+            arryC++;
+        }
         getNextStrngArry(arryStrt);
         matchLexTok(lexm,tokn,":");
         matchLexTok(lexm,tokn,"INT");
@@ -103,6 +111,7 @@ void parseProc(){
     printBeginAsm();
     parseStatmntsLst();
     matchLexTok(lexm,tokn, "END");
+    printEndAsm();
 }
 
 void parseStatmntsLst(){
@@ -125,15 +134,24 @@ void parseIndvStatmnt(){
 }
 
 void parseWrtLne(){
+    int strngLen;
+    char strLeng[12];
+    char *tmpLexm;
+    tmpLexm=lexem[arryStrt];
     matchLexTok(lexm,tokn,"WRITELN");
     matchLexTok(lexm,tokn,"(");
-    matchLexTok(lexm,tokn,"IDENTIF");
+    parseExprsn();
+    //matchLexTok(lexm,tokn,"IDENTIF");
     matchLexTok(lexm,tokn,")");
-    printWritLn(1,"test");
+    strngLen=strlen(tmpLexm);
+    sprintf(strLeng,"%d",strLeng);
+    printWritLn(strLeng,tmpLexm);
     matchLexTok(lexm,tokn,";");
 }
 
 void parseAssngmnt(){
+    //char is getting moved forward because this is called again this temp must be unique
+    char *tmpLexm;
     tmpLexm=lexem[arryStrt];
     matchLexTok(lexm,tokn,"IDENTIF");
     matchLexTok(lexm,tokn,":=");
@@ -148,12 +166,14 @@ void parseExprsn(){
 }
 
 void parseAddExprsn(){
+    char *tmpLexm;
+    tmpLexm=lexem[arryStrt];
     if(strcmp(tokn,"+") && (strcmp(tokn,"-"))){
         return;
     }else{
-        printAdditionLines(tokn);
         getNextStrngArry(arryStrt);
         parseTerms();
+        printAdditionLines(tmpLexm);
         parseAddExprsn();
     }
 }
@@ -164,22 +184,26 @@ void parseTerms(){
 }
 
 void parseAddTerms(){
-
+    char *tmpLexm;
+    tmpLexm=lexem[arryStrt];
     if(strcmp(tokn,"*") && (strcmp(tokn,"/"))){
         return;
     }else{
         getNextStrngArry(arryStrt);
         parseTerms();
+        printMultiLines(tmpLexm);
         parseAddTerms();
     }
 }
 //ERROR IS OCCURING IN HERE============================================================================================
 void parseFactor(){
+    char *tmpLexm;
+    tmpLexm=lexem[arryStrt];
     if(compLexTok(lexm,tokn,"IDENTIF")==0){
-        printIdentifs(lexm);
+        printIdentifs(tmpLexm);
         getNextStrngArry(arryStrt);
     }else if(compLexTok(lexm,tokn,"NUMERIC")==0){
-        printNums(lexm);
+        printNums(tmpLexm);
         getNextStrngArry(arryStrt);
     }else{
         matchLexTok(lexm,tokn,"(");
