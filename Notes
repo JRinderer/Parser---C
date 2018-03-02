@@ -353,3 +353,18 @@
     comparison I was making should have been an && statement and not a || statement. I also referenced an incorrect
     funciton which resulted in contiunal recursion and ultimately a segmentation fault. Next step is to translate the
     .scan file into assembly language.
+======================================2/18/2018 - END - JRinderer======================================================
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+======================================3/2/2018 - START - JRinderer=====================================================
+    ********Summary: Able to successfully translate a .pal program into X86_64 Assembly and compile with NASM into a
+    functioning program. Some things to consider: Possibly build a function that can be use in the SCANNER and the
+    PARSER. This funcitons purpose would be to build chars into words. Right now the SCANNER and PARSER both are
+    doing a similar task and building into an array. Focus from here forward will be on generating X86_64 Assemlby
+    for .klump language. 
+    
+        -Overview: KLUMP NEEDS
+            1. Need to detect and build decimal numbers. These could be x.xxxx or .xxx
+            2. Modify parser for more complex  tasks based on KLUMP grammar.
+            3. Build functions for building tables and tracking variables (literals and such). This should include the variable,
+            it's type, and the table identifier _L1_ for example.
