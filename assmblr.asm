@@ -14,6 +14,8 @@ main:		nop										;main PROC
 			pop				qword [A]				;print assignments
 			push			2						;emit numbers
 			pop				qword [B]				;print assignments
+			push			100						;emit numbers
+			pop				qword [D]				;print assignments
 			push			qword [A]				;print identifiers
 			push			qword [B]				;print identifiers
 			pop				rbx						;print addition ops
@@ -21,6 +23,11 @@ main:		nop										;main PROC
 			add				rax,rbx					;adds the contents of rax and rbx
 			push			rax
 			push			qword [A]				;print identifiers
+			push			qword [D]				;print identifiers
+			pop				rbx						;print addition ops
+			pop				rax
+			add				rax,rbx					;adds the contents of rax and rbx
+			push			rax
 			pop				rbx						;print multiplcation/division
 			pop				rax
 			mov				rdx,0					;move a 0 into rdx
@@ -45,6 +52,15 @@ main:		nop										;main PROC
 			mov				rsi,_CRLF_
 			mov				rax,0
 			call			printf
+			push			qword [E]				;print identifiers
+			mov				rdi,_INT_
+			pop				rsi
+			mov				rax,0
+			call			printf
+			mov				rdi,_STR_
+			mov				rsi,_CRLF_
+			mov				rax,0
+			call			printf
 			mov				rsp,rbp
 			pop				rbp
 			mov				rax,0
@@ -57,6 +73,7 @@ main:		nop										;main PROC
 A:			resq			1
 B:			resq			1
 E:			resq			1
+D:			resq			1
  
 ;DATA Section
  

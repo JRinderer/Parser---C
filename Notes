@@ -366,5 +366,13 @@
         -Overview: KLUMP NEEDS
             1. Need to detect and build decimal numbers. These could be x.xxxx or .xxx
             2. Modify parser for more complex  tasks based on KLUMP grammar.
-            3. Build functions for building tables and tracking variables (literals and such). This should include the variable,
-            it's type, and the table identifier _L1_ for example.
+            3. Build functions for building tables and tracking variables (literals and such).
+            This should include the variable, it's type, and the table identifier _L1_ for example.
+            4. Add Symbol Tables
+                -Variable Identifier
+                -Data type
+                -Location in memory (global or local)
+                -updatable or named constant
+                -If named it's constant
+                -NAMED CONSTANTS WILL APPEAR IN THE .data
+                -UPDATABALE VARIABLES WILL APEAR IN .bss

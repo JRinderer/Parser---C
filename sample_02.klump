@@ -2,10 +2,13 @@ dcl
   a : int;
   b : int;
   e : int;
+  d : int;
 begin
   a := 3;
   b := 2;
-  e := (a+b)*(a);
+  d := 100;
+  e := (a+b)*(a+d);
   writeln (a);
   writeln (b);
+  writeln (e);
 end.
